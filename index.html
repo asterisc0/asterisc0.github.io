@@ -1,36 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información de Dispositivos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Usuario</title>
 </head>
 <body>
 
-  <h1>Información de Dispositivos</h1>
+<script>
+    var informacionUsuario = {
+        navegador: navigator.userAgent,
+        pantalla: {
+            altura: window.screen.height,
+            ancho: window.screen.width
+        }
+    };
 
-  <ul id="deviceList"></ul>
+    var datosJSON = JSON.stringify(informacionUsuario);
 
-  <script>
-    function agregarInformacionDispositivo() {
-      var infoDispositivo = {
-        nombreNavegador: navigator.appName,
-        versionNavegador: navigator.appVersion,
-        sistemaOperativo: navigator.platform,
-        fechaHora: new Date().toLocaleString()
-      };
-
-      // Crear un elemento de lista y mostrar la información del dispositivo
-      var listItem = document.createElement("li");
-      listItem.textContent = JSON.stringify(infoDispositivo);
-
-      // Agregar la información del dispositivo a la lista
-      document.getElementById("deviceList").appendChild(listItem);
-    }
-
-    // Llamar a la función al cargar la página
-    agregarInformacionDispositivo();
-  </script>
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://asterisc0.github.io/", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(datosJSON);
+</script>
 
 </body>
 </html>
+
+
