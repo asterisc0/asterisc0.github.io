@@ -76,19 +76,29 @@
 
   <!-- Script para funciones y acciones -->
   <script>
-    function obtenerInformacion(tipo) {
-      // Lógica para obtener información real aquí (por ejemplo, mediante una API)
-      // En este ejemplo, se utiliza una simulación para propósitos demostrativos
-      const info = tipo === 'ip' ? 'Información de IP real.' : 'Información de Teléfono real.';
-
-      // Mostrar la información en el contenedor correspondiente
+    async function obtenerInformacion(tipo) {
+      const inputElement = tipo === 'ip' ? document.getElementById('ipInput') : document.getElementById('phoneInput');
       const infoContainer = tipo === 'ip' ? document.getElementById('ipInfoContainer') : document.getElementById('phoneInfoContainer');
-      infoContainer.innerHTML = `<p>${info}</p>`;
 
-      // Opcional: Puedes agregar un temporizador para que la información desaparezca después de cierto tiempo
-      setTimeout(() => {
-        infoContainer.innerHTML = '';
-      }, 5000); // Desaparecerá después de 5 segundos (puedes ajustar este valor)
+      try {
+        let response;
+        if (tipo === 'ip') {
+          response = await fetch(`https://ipinfo.io/${inputElement.value}/json`);
+        } else {
+          // Utiliza tu propia clave de API de Numverify
+          const apiKey = 'TU_CLAVE_DE_API';
+          response = await fetch(`http://apilayer.com/numverify/obtenerInformacion?numero=${inputElement.value}&apikey=${apiKey}`);
+        }
+
+        if (response.ok) {
+          const data = await response.json();
+          infoContainer.innerHTML = `<p>${JSON.stringify(data)}</p>`;
+        } else {
+          infoContainer.innerHTML = `<p>Error al obtener la información.</p>`;
+        }
+      } catch (error) {
+        infoContainer.innerHTML = `<p>Error en la solicitud.</p>`;
+      }
     }
   </script>
 
