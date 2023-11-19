@@ -6,29 +6,14 @@
     <title>ESPERA 3D Avanzado</title>
     <script type="text/javascript" src="https://brython.info/src/brython.js"></script>
     <style>
-        body {
-            background-color: #121212;
-            color: #FF5252;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        h1 {
-            color: #FFD600;
-            margin-bottom: 20px;
-        }
-
-        .container {
+        /* Estilos previos */
+        #resultContainer {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-around;
         }
 
-        .box {
+        .resultBox {
             background-color: #263238;
             color: white;
             padding: 20px;
@@ -36,30 +21,18 @@
             transition: transform 0.3s, background-color 0.3s;
             cursor: pointer;
             width: calc(33.33% - 20px);
+            margin: 10px;
+            box-sizing: border-box;
         }
 
-        .box:hover {
+        .resultBox:hover {
             transform: scale(1.05);
             background-color: #004D40;
         }
 
-        button {
-            background-color: #004D40;
-            color: white;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #00796B;
-        }
-
-        textarea {
+        .resultBox textarea {
             width: 100%;
-            height: 150px;
+            height: 100px;
             margin-top: 10px;
             border: 1px solid #78909C;
             padding: 10px;
@@ -67,35 +40,7 @@
             color: #B0BEC5;
             background-color: #263238;
             resize: none;
-        }
-
-        #mandalaCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        #formContainer {
-            max-width: 500px;
-            margin: 20px auto;
-            background-color: #263238;
-            padding: 20px;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
-
-        input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            color: #B0BEC5;
-            background-color: #394249;
-            border: 1px solid #78909C;
-            border-radius: 5px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -103,42 +48,47 @@
     <canvas id="mandalaCanvas"></canvas>
     <h1>ESPERA 3D Avanzado</h1>
     
-    <div id="formContainer">
-        <form id="searchForm" onsubmit="return false;">
-            <label for="ipInput">IP:</label>
-            <input type="text" id="ipInput" placeholder="Ingrese la IP">
-
-            <label for="emailInput">Correo:</label>
-            <input type="text" id="emailInput" placeholder="Ingrese el correo">
-
-            <label for="urlInput">URL:</label>
-            <input type="text" id="urlInput" placeholder="Ingrese la URL">
-
-            <button onclick="search()">Buscar</button>
-        </form>
-    </div>
-    
-    <div class="container">
-        <!-- Información de IP -->
-        <div class="box">
-            <h2>Información de IP</h2>
-            <button onclick="getIpInfo()">Obtener información</button>
-            <textarea id="ipInfo" readonly></textarea>
+    <div id="resultContainer">
+        <!-- Resultados adicionales -->
+        <div class="resultBox">
+            <h2>Información Geográfica de la IP</h2>
+            <button onclick="getGeographicalInfo()">Obtener información</button>
+            <textarea id="geoInfo" readonly></textarea>
         </div>
 
-        <!-- Información Ética de Correo -->
-        <div class="box">
-            <h2>Información Ética de Correo</h2>
-            <button onclick="getEmailEthics()">Obtener información ética</button>
-            <textarea id="emailEthics" readonly></textarea>
+        <div class="resultBox">
+            <h2>Consulta WHOIS para la IP</h2>
+            <button onclick="getWhoisInfo()">Obtener información</button>
+            <textarea id="whoisInfo" readonly></textarea>
         </div>
 
-        <!-- Información de URL -->
-        <div class="box">
-            <h2>Información de URL</h2>
-            <button onclick="getUrlInfo()">Obtener información</button>
-            <textarea id="urlInfo" readonly></textarea>
+        <div class="resultBox">
+            <h2>Exploración de Subdominios para la URL</h2>
+            <button onclick="getSubdomains()">Obtener información</button>
+            <textarea id="subdomainsInfo" readonly></textarea>
         </div>
+
+        <!-- Funciones añadidas -->
+        <div class="resultBox">
+            <h2>Verificación de Enlaces Rotos en la URL</h2>
+            <button onclick="checkBrokenLinks()">Verificar enlaces</button>
+            <textarea id="brokenLinksInfo" readonly></textarea>
+        </div>
+
+        <div class="resultBox">
+            <h2>Información de SSL para la URL</h2>
+            <button onclick="getSslInfo()">Obtener información</button>
+            <textarea id="sslInfo" readonly></textarea>
+        </div>
+
+        <div class="resultBox">
+            <h2>Escaneo de Puertos para la URL</h2>
+            <button onclick="portScan()">Escanear puertos</button>
+            <textarea id="portScanInfo" readonly></textarea>
+        </div>
+
+        <!-- Agregar más cajas de resultados según sea necesario -->
+
     </div>
 
     <script type="text/python">
@@ -171,32 +121,40 @@
     </script>
 
     <script>
-        function getIpInfo() {
-            // Implementa la lógica real para obtener información de IP aquí
-            document.getElementById("ipInfo").value = "Lógica de obtener información de IP";
+        // Nuevas funciones
+        function getGeographicalInfo() {
+            // Implementación de la lógica real para obtener información geográfica de la IP
+            document.getElementById("geoInfo").value = "Lógica de obtener información geográfica de la IP";
         }
 
-        function getEmailEthics() {
-            // Implementa la lógica real para obtener información ética de un correo aquí
-            document.getElementById("emailEthics").value = "Lógica de obtener información ética de un correo";
+        function getWhoisInfo() {
+            // Implementación de la lógica real para obtener información WHOIS para la IP
+            document.getElementById("whoisInfo").value = "Lógica de obtener información WHOIS para la IP";
         }
 
-        function getUrlInfo() {
-            // Implementa la lógica real para obtener información de URL aquí
-            document.getElementById("urlInfo").value = "Lógica de obtener información de URL";
+        function getSubdomains() {
+            // Implementación de la lógica real para explorar subdominios para la URL
+            document.getElementById("subdomainsInfo").value = "Lógica de explorar subdominios para la URL";
         }
 
-        function search() {
-            // Implementa la lógica real para la búsqueda aquí
-            var ip = document.getElementById("ipInput").value;
-            var email = document.getElementById("emailInput").value;
-            var url = document.getElementById("urlInput").value;
-
-            // Lógica de búsqueda y actualización de resultados
-            document.getElementById("ipInfo").value = "Resultados de la búsqueda de IP";
-            document.getElementById("emailEthics").value = "Resultados de la búsqueda ética de correo";
-            document.getElementById("urlInfo").value = "Resultados de la búsqueda de URL";
+        // Funciones añadidas
+        function checkBrokenLinks() {
+            // Implementación de la lógica real para verificar enlaces rotos en la URL
+            document.getElementById("brokenLinksInfo").value = "Lógica de verificar enlaces rotos en la URL";
         }
+
+        function getSslInfo() {
+            // Implementación de la lógica real para obtener información de SSL para la URL
+            document.getElementById("sslInfo").value = "Lógica de obtener información de SSL para la URL";
+        }
+
+        function portScan() {
+            // Implementación de la lógica real para el escaneo de puertos en la URL
+            document.getElementById("portScanInfo").value = "Lógica de escaneo de puertos para la URL";
+        }
+
+        // Agregar más funciones según sea necesario
+
     </script>
 
     <script type="text/javascript">
