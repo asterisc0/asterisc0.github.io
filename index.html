@@ -5,20 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Información de IP y Teléfono</title>
   <style>
-    /* Estilos generales */
+    /* Estilos (los estilos pueden personalizarse según tus preferencias) */
     body {
       font-family: 'Gothic', sans-serif;
       margin: 0;
       padding: 0;
       text-align: center;
-      background-color: #000; /* Fondo negro */
-      color: #FFF; /* Texto blanco */
-    }
-
-    header, footer {
-      background-color: #333;
-      padding: 10px;
-      color: white;
+      background-color: #000;
+      color: #FFF;
     }
 
     section {
@@ -42,7 +36,7 @@
       padding: 10px;
       margin: 10px;
       cursor: pointer;
-      background-color: #1E90FF; /* Azul oscuro */
+      background-color: #1E90FF;
       color: white;
       border: none;
       border-radius: 5px;
@@ -55,18 +49,6 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    /* Estilo nuevo #31: Destacar Contenido Nuevo */
-    .new-content {
-      color: #FF6347; /* Color coral */
-    }
-
-    /* Estilo nuevo #10: Barra de Progreso */
-    progress {
-      width: 100%;
-      height: 20px;
-      margin-top: 10px;
     }
   </style>
 </head>
@@ -81,12 +63,6 @@
     <h2>Información de IP</h2>
     <input type="text" id="ipInput" placeholder="Ingresa una dirección IP...">
     <button onclick="obtenerInformacion('ip')">Obtener Información</button>
-    <button onclick="ejecutarAccion('ubicacion')">Obtener Ubicación</button>
-    <button onclick="ejecutarAccion('host')">Obtener Host</button>
-    <button onclick="ejecutarAccion('seguridad')">Verificar Seguridad</button>
-    <button onclick="mostrarHistorial()">Mostrar Historial de IP</button>
-    <button onclick="obtenerISP()">Obtener ISP</button>
-    <button onclick="ejecutarAccion('puertos')">Escanear Puertos</button>
     <div id="ipInfoContainer" class="infoContainer"></div>
   </section>
 
@@ -95,105 +71,25 @@
     <h2>Información de Teléfono</h2>
     <input type="text" id="phoneInput" placeholder="Ingresa un número de teléfono...">
     <button onclick="obtenerInformacion('phone')">Obtener Información</button>
-    <button onclick="verificarIdentidad()">Verificar Identidad</button>
-    <button onclick="obtenerTipo()">Obtener Tipo de Teléfono</button>
-    <button onclick="buscarContactos()">Buscar en Contactos</button>
-    <button onclick="consultarDirectorioTelefonico()">Consultar Directorio Telefónico</button>
-    <button onclick="generarInforme()">Generar Informe de Teléfono</button>
-    <button onclick="bloquearTelefono()">Bloquear Teléfono</button>
     <div id="phoneInfoContainer" class="infoContainer"></div>
   </section>
 
-  <!-- Sección de Ejemplo 3: Calculadora de Conversión -->
-  <section id="conversionCalculator" class="nuevo">
-    <h2>Calculadora de Conversión</h2>
-    <input type="number" id="valorConversion" placeholder="Ingrese el valor...">
-    <select id="unidadOrigen">
-      <option value="metros">Metros</option>
-      <option value="kilometros">Kilómetros</option>
-    </select>
-    <button onclick="realizarConversion()">Realizar Conversión</button>
-    <div id="resultadoConversion" class="infoContainer"></div>
-  </section>
-
-  <!-- Sección de Ejemplo 4: Compartir en Redes Sociales -->
-  <section id="redesSociales" class="nuevo">
-    <h2>Compartir en Redes Sociales</h2>
-    <button onclick="compartirEnRed('facebook')">Compartir en Facebook</button>
-    <button onclick="compartirEnRed('twitter')">Compartir en Twitter</button>
-  </section>
-
-  <!-- Sección de Ejemplo 8: Reproductor de Música -->
-  <section id="reproductorMusica" class="nuevo">
-    <h2>Reproductor de Música</h2>
-    <audio controls>
-      <source src="cancion.mp3" type="audio/mp3">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
-  </section>
-
-  <!-- Sección de Ejemplo 15: Información de Red en Tiempo Real -->
-  <section id="informacionRedTiempoReal" class="nuevo">
-    <h2>Información de Red en Tiempo Real</h2>
-    <div id="informacionRed" class="infoContainer"></div>
-  </section>
-
-  <!-- Sección de Ejemplo 30: Herramienta de Dibujo/Anotación -->
-  <section id="herramientaDibujo" class="nuevo">
-    <h2>Herramienta de Dibujo/Anotación</h2>
-    <canvas id="lienzo" width="500" height="300" style="border:1px solid #000;"></canvas>
-    <button onclick="limpiarLienzo()">Limpiar</button>
-  </section>
-
-  <footer>
-    <p>Visita nuestras otras páginas: <a href="otra_pagina.html">Otra Página</a></p>
-  </footer>
-
-  <!-- Contenedor adicional para la Barra de Progreso -->
-  <div id="progressContainer">
-    <progress value="50" max="100"></progress>
-  </div>
-
-  <!-- Nueva personalización #31: Destacar Contenido Nuevo -->
-  <button onclick="destacarContenidoNuevo()">Destacar Contenido Nuevo</button>
-
   <!-- Script para funciones y acciones -->
   <script>
-    // Funciones existentes...
+    function obtenerInformacion(tipo) {
+      // Lógica para obtener información real aquí (por ejemplo, mediante una API)
+      // En este ejemplo, se utiliza una simulación para propósitos demostrativos
+      const info = tipo === 'ip' ? 'Información de IP real.' : 'Información de Teléfono real.';
 
-    // Ejemplo 3: Calculadora de Conversión
-    function realizarConversion() {
-      // Implementa la lógica para la calculadora de conversión
-      const valor = document.getElementById('valorConversion').value;
-      const unidadOrigen = document.getElementById('unidadOrigen').value;
-      const resultado = unidadOrigen === 'metros' ? valor * 1000 : valor / 1000;
-      document.getElementById('resultadoConversion').innerHTML = `Resultado: ${resultado.toFixed(2)} ${unidadOrigen === 'metros' ? 'Kilómetros' : 'Metros'}`;
+      // Mostrar la información en el contenedor correspondiente
+      const infoContainer = tipo === 'ip' ? document.getElementById('ipInfoContainer') : document.getElementById('phoneInfoContainer');
+      infoContainer.innerHTML = `<p>${info}</p>`;
+
+      // Opcional: Puedes agregar un temporizador para que la información desaparezca después de cierto tiempo
+      setTimeout(() => {
+        infoContainer.innerHTML = '';
+      }, 5000); // Desaparecerá después de 5 segundos (puedes ajustar este valor)
     }
-
-    // Ejemplo 4: Compartir en Redes Sociales
-    function compartirEnRed(redSocial) {
-      // Implementa la lógica para compartir en redes sociales
-      alert(`Compartiendo en ${redSocial}...`);
-    }
-
-    // Ejemplo 8: Reproductor de Música
-    // No se necesita una función adicional, utiliza el elemento audio.
-
-    // Ejemplo 15: Información de Red en Tiempo Real
-    setInterval(() => {
-      // Simulación de información en tiempo real
-      const informacionRed = `Velocidad: ${Math.random() * 100} Mbps, Latencia: ${Math.random() * 50} ms`;
-      document.getElementById('informacionRed').innerHTML = informacionRed;
-    }, 5000); // Actualiza cada 5 segundos
-
-    // Ejemplo 30: Herramienta de Dibujo/Anotación
-    const canvas = document.getElementById('lienzo');
-    const ctx = canvas.getContext('2d');
-    
-    function limpiarLienzo() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
   </script>
 
 </body>
