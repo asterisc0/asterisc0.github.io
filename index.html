@@ -7,13 +7,66 @@
     <script type="text/javascript" src="https://brython.info/src/brython.js"></script>
     <style>
         /* Estilos previos */
-        #resultContainer {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #212121;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #37474F;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result-container {
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
 
-        .resultBox {
+        .result-box {
             background-color: #263238;
             color: white;
             padding: 20px;
@@ -25,12 +78,12 @@
             box-sizing: border-box;
         }
 
-        .resultBox:hover {
+        .result-box:hover {
             transform: scale(1.05);
             background-color: #004D40;
         }
 
-        .resultBox textarea {
+        .result-box textarea {
             width: 100%;
             height: 100px;
             margin-top: 10px;
@@ -45,51 +98,26 @@
     </style>
 </head>
 <body>
-    <canvas id="mandalaCanvas"></canvas>
-    <h1>ESPERA 3D Avanzado</h1>
+    <header>
+        <h1>ESPERA 3D Avanzado</h1>
+    </header>
     
-    <div id="resultContainer">
-        <!-- Resultados adicionales -->
-        <div class="resultBox">
-            <h2>Información Geográfica de la IP</h2>
-            <button onclick="getGeographicalInfo()">Obtener información</button>
-            <textarea id="geoInfo" readonly></textarea>
+    <main>
+        <div class="search-container">
+            <h2>Buscar Información</h2>
+            <label for="ipInput">IP:</label>
+            <input type="text" id="ipInput" class="search-box" placeholder="Ingrese la IP">
+
+            <label for="urlInput">URL:</label>
+            <input type="text" id="urlInput" class="search-box" placeholder="Ingrese la URL">
+
+            <button onclick="search()">Buscar</button>
         </div>
 
-        <div class="resultBox">
-            <h2>Consulta WHOIS para la IP</h2>
-            <button onclick="getWhoisInfo()">Obtener información</button>
-            <textarea id="whoisInfo" readonly></textarea>
+        <div class="result-container" id="resultContainer">
+            <!-- Resultados adicionales -->
         </div>
-
-        <div class="resultBox">
-            <h2>Exploración de Subdominios para la URL</h2>
-            <button onclick="getSubdomains()">Obtener información</button>
-            <textarea id="subdomainsInfo" readonly></textarea>
-        </div>
-
-        <!-- Funciones añadidas -->
-        <div class="resultBox">
-            <h2>Verificación de Enlaces Rotos en la URL</h2>
-            <button onclick="checkBrokenLinks()">Verificar enlaces</button>
-            <textarea id="brokenLinksInfo" readonly></textarea>
-        </div>
-
-        <div class="resultBox">
-            <h2>Información de SSL para la URL</h2>
-            <button onclick="getSslInfo()">Obtener información</button>
-            <textarea id="sslInfo" readonly></textarea>
-        </div>
-
-        <div class="resultBox">
-            <h2>Escaneo de Puertos para la URL</h2>
-            <button onclick="portScan()">Escanear puertos</button>
-            <textarea id="portScanInfo" readonly></textarea>
-        </div>
-
-        <!-- Agregar más cajas de resultados según sea necesario -->
-
-    </div>
+    </main>
 
     <script type="text/python">
         # Código Python para dibujar un mandala como fondo de página
@@ -124,37 +152,69 @@
         // Nuevas funciones
         function getGeographicalInfo() {
             // Implementación de la lógica real para obtener información geográfica de la IP
-            document.getElementById("geoInfo").value = "Lógica de obtener información geográfica de la IP";
+            displayResult("Lógica de obtener información geográfica de la IP");
         }
 
         function getWhoisInfo() {
             // Implementación de la lógica real para obtener información WHOIS para la IP
-            document.getElementById("whoisInfo").value = "Lógica de obtener información WHOIS para la IP";
+            displayResult("Lógica de obtener información WHOIS para la IP");
         }
 
         function getSubdomains() {
             // Implementación de la lógica real para explorar subdominios para la URL
-            document.getElementById("subdomainsInfo").value = "Lógica de explorar subdominios para la URL";
+            displayResult("Lógica de explorar subdominios para la URL");
         }
 
         // Funciones añadidas
         function checkBrokenLinks() {
             // Implementación de la lógica real para verificar enlaces rotos en la URL
-            document.getElementById("brokenLinksInfo").value = "Lógica de verificar enlaces rotos en la URL";
+            displayResult("Lógica de verificar enlaces rotos en la URL");
         }
 
         function getSslInfo() {
             // Implementación de la lógica real para obtener información de SSL para la URL
-            document.getElementById("sslInfo").value = "Lógica de obtener información de SSL para la URL";
+            displayResult("Lógica de obtener información de SSL para la URL");
         }
 
         function portScan() {
             // Implementación de la lógica real para el escaneo de puertos en la URL
-            document.getElementById("portScanInfo").value = "Lógica de escaneo de puertos para la URL";
+            displayResult("Lógica de escaneo de puertos para la URL");
         }
 
-        // Agregar más funciones según sea necesario
+        // Función principal de búsqueda
+        function search() {
+            var ip = document.getElementById("ipInput").value;
+            var url = document.getElementById("urlInput").value;
 
+            // Limpiar resultados anteriores
+            document.getElementById("resultContainer").innerHTML = "";
+
+            // Ejecutar funciones según la información proporcionada
+            if (ip) {
+                getGeographicalInfo();
+                getWhoisInfo();
+            }
+            if (url) {
+                getSubdomains();
+                checkBrokenLinks();
+                getSslInfo();
+                portScan();
+            }
+        }
+
+        // Función para mostrar resultados
+        function displayResult(result) {
+            var resultContainer = document.getElementById("resultContainer");
+            var resultBox = document.createElement("div");
+            resultBox.className = "result-box";
+
+            var textarea = document.createElement("textarea");
+            textarea.setAttribute("readonly", true);
+            textarea.textContent = result;
+
+            resultBox.appendChild(textarea);
+            resultContainer.appendChild(resultBox);
+        }
     </script>
 
     <script type="text/javascript">
