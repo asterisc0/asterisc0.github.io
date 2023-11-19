@@ -3,192 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información del Usuario</title>
+    <title>ESPERA 3D</title>
+    <script type="text/javascript" src="https://brython.info/src/brython.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #FF5252;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
 
-        #ipInput {
-            padding: 10px;
-            margin-bottom: 10px;
+        h1 {
+            color: #FFD600;
+            margin-bottom: 20px;
         }
 
-        #ipInfo {
-            border: 1px solid #ccc;
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .box {
+            background-color: #263238;
+            color: white;
             padding: 20px;
-            display: none;
-            margin-top: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+            width: calc(33.33% - 20px);
         }
 
-        #actions {
-            margin-top: 20px;
+        .box:hover {
+            transform: scale(1.05);
+            background-color: #004D40;
         }
 
-        .info-container {
-            text-align: left;
+        button {
+            background-color: #004D40;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00796B;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-top: 10px;
+            border: 1px solid #78909C;
+            padding: 10px;
+            box-sizing: border-box;
+            color: #B0BEC5;
+            background-color: #263238;
+            resize: none;
+        }
+
+        #mandalaCanvas {
+            border: 2px solid #004D40;
+            border-radius: 10px;
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Información del Usuario</h1>
+    <h1>ESPERA 3D</h1>
     
-    <!-- Sección de Información de IP -->
-    <div>
-        <label for="ipInput">Ingrese una dirección IP:</label>
-        <input type="text" id="ipInput" placeholder="Ejemplo: 8.8.8.8">
-        <button onclick="getIpInfo()">Obtener información</button>
-
-        <div id="ipInfo" class="info-container">
-            <h2>Información de la IP:</h2>
-            <p id="ipDetails"></p>
+    <div class="container">
+        <!-- Información de IP -->
+        <div class="box">
+            <h2>Información de IP</h2>
+            <button onclick="getIpInfo()">Obtener información</button>
+            <textarea id="ipInfo" readonly></textarea>
         </div>
+
+        <!-- Información Ética de Correo -->
+        <div class="box">
+            <h2>Información Ética de Correo</h2>
+            <button onclick="getEmailEthics()">Obtener información ética</button>
+            <textarea id="emailEthics" readonly></textarea>
+        </div>
+
+        <!-- Información de URL -->
+        <div class="box">
+            <h2>Información de URL</h2>
+            <button onclick="getUrlInfo()">Obtener información</button>
+            <textarea id="urlInfo" readonly></textarea>
+        </div>
+
+        <!-- Mandala Móvil 3D -->
+        <div class="box" style="position: relative;">
+            <h2>Mandala Móvil 3D</h2>
+            <canvas id="mandalaCanvas" width="150" height="150" style="border: 2px solid #004D40; border-radius: 10px;"></canvas>
+            <script type="text/python">
+                # Código Python para dibujar un mandala móvil 3D
+                import math
+
+                def draw_mandala_3d():
+                    mandala_canvas = document.getElementById("mandalaCanvas")
+                    context = mandala_canvas.getContext("2d")
+                    context.clearRect(0, 0, mandala_canvas.width, mandala_canvas.height)
+
+                    # Configuración de colores y estilos
+                    context.strokeStyle = "red"
+                    context.lineWidth = 2
+
+                    # Mueve el mandala por la página
+                    x_offset = 50 * math.cos(js.global.pageYOffset / 50)
+                    y_offset = 50 * math.sin(js.global.pageYOffset / 50)
+
+                    # Dibujar círculos en forma de mandala 3D con la posición modificada
+                    for i in range(6):
+                        angle = i * (math.pi / 3)
+                        x = mandala_canvas.width / 2 + x_offset + 30 * math.cos(angle)
+                        y = mandala_canvas.height / 2 + y_offset + 30 * math.sin(angle)
+
+                        context.beginPath()
+                        context.arc(x, y, 20, 0, 2 * math.pi)
+                        context.stroke()
+
+                # Llama a la función para dibujar el mandala 3D
+                draw_mandala_3d()
+            </script>
+        </div>
+
+        <!-- Nueva Función - Obtener Información 3D -->
+        <div class="box">
+            <h2>Obtener Información 3D</h2>
+            <button onclick="get3DInfo()">Acción 3D</button>
+            <textarea id="info3D" readonly></textarea>
+        </div>
+
+        <!-- Agrega aquí más bloques similares según tus necesidades -->
     </div>
 
-    <!-- Sección de Acciones Adicionales -->
-    <div id="actions" class="info-container">
-        <h2>Acciones adicionales:</h2>
-        <button onclick="getGeolocation()">Obtener ubicación</button>
-        <button onclick="getDeviceInfo()">Obtener información del dispositivo</button>
-        <button onclick="clearData()">Limpiar datos</button>
-        <button onclick="getSystemInfo()">Obtener información del sistema</button>
-        <button onclick="getNetworkInfo()">Obtener información de red</button>
-        <button onclick="getBrowserInfo()">Obtener información del navegador</button>
-        <button onclick="getWindowInfo()">Obtener información de la ventana</button>
-        <button onclick="getUserInfo()">Obtener información del usuario</button>
-        <button onclick="getStorageInfo()">Obtener información de almacenamiento</button>
-        <button onclick="getPerformanceInfo()">Obtener información de rendimiento</button>
-        <button onclick="getMediaInfo()">Obtener información de medios</button>
-        <button onclick="getSensorInfo()">Obtener información de sensores</button>
-        <button onclick="getPaymentInfo()">Obtener información de pagos</button>
-        <button onclick="getConnectionInfo()">Obtener información de conexión</button>
-        <button onclick="getHistoryInfo()">Obtener historial de navegación</button>
-        <button onclick="getCookiesInfo()">Obtener información de cookies</button>
-        <button onclick="checkJavaScriptSupport()">Verificar soporte de JavaScript</button>
-        <button onclick="checkPrivateMode()">Verificar modo privado</button>
-        <button onclick="getInputDevices()">Obtener dispositivos de entrada</button>
-        <button onclick="getBatteryInfo()">Obtener información de la batería</button>
-        <button onclick="detectUserActivity()">Detectar actividad del usuario</button>
-        <button onclick="getFullScreenInfo()">Obtener información de pantalla completa</button>
-        <button onclick="checkPrintSupport()">Verificar soporte de impresión</button>
-        <button onclick="getWebGLInfo()">Obtener información de WebGL</button>
-        <button onclick="getLanguageInfo()">Obtener información de idioma del sistema</button>
-        <button onclick="detectExtensions()">Detectar extensiones del navegador</button>
-        <button onclick="getDateAndTime()">Obtener fecha y hora actuales</button>
-        <button onclick="checkWebSocketsSupport()">Verificar soporte de WebSockets</button>
-        <button onclick="getLocalStorageInfo()">Obtener información de almacenamiento local</button>
-        <button onclick="checkWebAssemblySupport()">Verificar soporte de WebAssembly</button>
-        <button onclick="getMediaDevicesInfo()">Obtener información de cámara y micrófono</button>
-        <button onclick="detectDarkMode()">Detectar modo oscuro/claro</button>
-        <button onclick="getBandwidthInfo()">Obtener información de reserva de ancho de banda</button>
-    </div>
-
-    <!-- Script JavaScript -->
     <script>
-        // Función para obtener información de IP
         function getIpInfo() {
-            // Código existente...
+            // Implementa la lógica real para obtener información de IP aquí
+            document.getElementById("ipInfo").value = "Lógica de obtener información de IP";
         }
 
-        // Resto de las funciones...
-
-        // Función para obtener historial de navegación
-        function getHistoryInfo() {
-            // Código existente...
+        function getEmailEthics() {
+            // Implementa la lógica real para obtener información ética de un correo aquí
+            document.getElementById("emailEthics").value = "Lógica de obtener información ética de un correo";
         }
 
-        // Función para obtener información de cookies
-        function getCookiesInfo() {
-            // Código existente...
+        function getUrlInfo() {
+            // Implementa la lógica real para obtener información de URL aquí
+            document.getElementById("urlInfo").value = "Lógica de obtener información de URL";
         }
 
-        // Función para verificar soporte de JavaScript
-        function checkJavaScriptSupport() {
-            // Código existente...
+        // Nueva Función 3D
+        function get3DInfo() {
+            // Implementa la lógica real para obtener información 3D aquí
+            document.getElementById("info3D").value = "Lógica de obtener información 3D";
         }
+    </script>
 
-        // Función para verificar modo privado
-        function checkPrivateMode() {
-            // Código existente...
-        }
-
-        // Función para obtener dispositivos de entrada
-        function getInputDevices() {
-            // Código existente...
-        }
-
-        // Función para obtener información de la batería
-        function getBatteryInfo() {
-            // Código existente...
-        }
-
-        // Función para detectar actividad del usuario
-        function detectUserActivity() {
-            // Código existente...
-        }
-
-        // Función para obtener información de pantalla completa
-        function getFullScreenInfo() {
-            // Código existente...
-        }
-
-        // Función para verificar soporte de impresión
-        function checkPrintSupport() {
-            // Código existente...
-        }
-
-        // Función para obtener información de WebGL
-        function getWebGLInfo() {
-            // Código existente...
-        }
-
-        // Función para obtener información de idioma del sistema
-        function getLanguageInfo() {
-            // Código existente...
-        }
-
-        // Función para detectar extensiones del navegador
-        function detectExtensions() {
-            // Código existente...
-        }
-
-        // Función para obtener fecha y hora actuales
-        function getDateAndTime() {
-            // Código existente...
-        }
-
-        // Función para verificar soporte de WebSockets
-        function checkWebSocketsSupport() {
-            // Código existente...
-        }
-
-        // Función para obtener información de almacenamiento local
-        function getLocalStorageInfo() {
-            // Código existente...
-        }
-
-        // Función para verificar soporte de WebAssembly
-        function checkWebAssemblySupport() {
-            // Código existente...
-        }
-
-        // Función para obtener información de cámara y micrófono
-        function getMediaDevicesInfo() {
-            // Código existente...
-        }
-
-        // Función para detectar modo oscuro/claro
-        function detectDarkMode() {
-            // Código existente...
-        }
-
-        // Función para obtener información de reserva de ancho de banda
-        function getBandwidthInfo() {
-            // Código existente...
-        }
+    <script type="text/javascript">
+        // Inicializar Brython
+        brython({debug: 1, pythonpath: ["http://localhost:8000/"]});
     </script>
 </body>
 </html>
