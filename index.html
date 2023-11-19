@@ -1,106 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información de IP y Teléfono</title>
-  <style>
-    /* Estilos (los estilos pueden personalizarse según tus preferencias) */
-    body {
-      font-family: 'Gothic', sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #000;
-      color: #FFF;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Información</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-    section {
-      margin: 20px;
-      display: inline-block;
-      vertical-align: top;
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      text-align: left;
-    }
+        form {
+            margin-bottom: 20px;
+        }
 
-    input {
-      width: 50%;
-      padding: 8px;
-      margin: 10px;
-    }
-
-    button {
-      padding: 10px;
-      margin: 10px;
-      cursor: pointer;
-      background-color: #1E90FF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    .infoContainer {
-      margin-top: 20px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+        #resultContainer {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Buscador de Información</h1>
 
-  <header>
-    <h1>Información de IP y Teléfono</h1>
-  </header>
+    <!-- Formulario de Número de Teléfono -->
+    <form id="phoneSearchForm">
+        <label for="phone">Número de Teléfono:</label>
+        <input type="text" id="phone" name="phone" required>
+        <button type="button" onclick="searchInformation('phone')">Buscar</button>
+    </form>
 
-  <!-- Sección de Información de IP -->
-  <section id="ipSection">
-    <h2>Información de IP</h2>
-    <input type="text" id="ipInput" placeholder="Ingresa una dirección IP...">
-    <button onclick="obtenerInformacion('ip')">Obtener Información</button>
-    <div id="ipInfoContainer" class="infoContainer"></div>
-  </section>
+    <!-- Formulario de Correo Electrónico -->
+    <form id="emailSearchForm">
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="button" onclick="searchInformation('email')">Buscar</button>
+    </form>
 
-  <!-- Sección de Información de Teléfono -->
-  <section id="phoneSection">
-    <h2>Información de Teléfono</h2>
-    <input type="text" id="phoneInput" placeholder="Ingresa un número de teléfono...">
-    <button onclick="obtenerInformacion('phone')">Obtener Información</button>
-    <div id="phoneInfoContainer" class="infoContainer"></div>
-  </section>
+    <!-- Formulario de Número de Cuenta Bancaria -->
+    <form id="bankAccountSearchForm">
+        <label for="bankAccount">Número de Cuenta Bancaria:</label>
+        <input type="text" id="bankAccount" name="bankAccount" required>
+        <button type="button" onclick="searchInformation('bankAccount')">Buscar</button>
+    </form>
 
-  <!-- Script para funciones y acciones -->
-  <script>
-    async function obtenerInformacion(tipo) {
-      const inputElement = tipo === 'ip' ? document.getElementById('ipInput') : document.getElementById('phoneInput');
-      const infoContainer = tipo === 'ip' ? document.getElementById('ipInfoContainer') : document.getElementById('phoneInfoContainer');
+    <!-- Agrega más formularios según tus necesidades -->
 
-      try {
-        let response;
-        if (tipo === 'ip') {
-          response = await fetch(`https://ipinfo.io/${inputElement.value}/json`);
-        } else {
-          // Utiliza tu propia clave de API de Numverify
-          const apiKey = 'TU_CLAVE_DE_API';
-          response = await fetch(`http://apilayer.com/numverify/obtenerInformacion?numero=${inputElement.value}&apikey=${apiKey}`);
+    <div id="resultContainer">
+        <!-- Aquí se mostrará la información de búsqueda -->
+    </div>
+
+    <script>
+        function searchInformation(type) {
+            var inputValue = document.getElementById(type).value;
+            var resultContainer = document.getElementById("resultContainer");
+
+            // Ejemplo de cómo mostrar los resultados (simulado)
+            var information = getSimulatedInfo(type, inputValue);
+            resultContainer.innerHTML = `<p>Información para ${type}: ${inputValue}</p><p>${information}</p>`;
         }
 
-        if (response.ok) {
-          const data = await response.json();
-          infoContainer.innerHTML = `<p>${JSON.stringify(data)}</p>`;
-        } else {
-          infoContainer.innerHTML = `<p>Error al obtener la información.</p>`;
+        // Función para obtener información simulada de un tipo específico
+        function getSimulatedInfo(type, value) {
+            // Puedes ajustar esto según tus necesidades
+            switch (type) {
+                case 'phone':
+                    return `Nombre: Juan Pérez, Dirección: Calle 123, Ciudad`;
+                case 'email':
+                    return `Usuario: usuario123, Nombre: María García`;
+                case 'bankAccount':
+                    return `Titular: John Doe, Banco: Banco Ejemplo`;
+                // Agrega más casos según tus necesidades
+                default:
+                    return `Información para ${type} no encontrada.`;
+            }
         }
-      } catch (error) {
-        infoContainer.innerHTML = `<p>Error en la solicitud.</p>`;
-      }
-    }
-  </script>
-
+    </script>
 </body>
 </html>
