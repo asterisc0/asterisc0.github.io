@@ -3,76 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Información</title>
+    <title>Información del Usuario</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            text-align: center;
+            padding: 20px;
         }
 
-        form {
-            margin-bottom: 20px;
+        #ipInput {
+            padding: 10px;
+            margin-bottom: 10px;
         }
 
-        #resultContainer {
+        #ipInfo {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: none;
+            margin-top: 20px;
+        }
+
+        #actions {
+            margin-top: 20px;
+        }
+
+        .info-container {
+            text-align: left;
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Buscador de Información</h1>
+    <h1>Información del Usuario</h1>
+    
+    <!-- Sección de Información de IP -->
+    <div>
+        <label for="ipInput">Ingrese una dirección IP:</label>
+        <input type="text" id="ipInput" placeholder="Ejemplo: 8.8.8.8">
+        <button onclick="getIpInfo()">Obtener información</button>
 
-    <!-- Formulario de Número de Teléfono -->
-    <form id="phoneSearchForm">
-        <label for="phone">Número de Teléfono:</label>
-        <input type="text" id="phone" name="phone" required>
-        <button type="button" onclick="searchInformation('phone')">Buscar</button>
-    </form>
-
-    <!-- Formulario de Correo Electrónico -->
-    <form id="emailSearchForm">
-        <label for="email">Correo Electrónico:</label>
-        <input type="email" id="email" name="email" required>
-        <button type="button" onclick="searchInformation('email')">Buscar</button>
-    </form>
-
-    <!-- Formulario de Número de Cuenta Bancaria -->
-    <form id="bankAccountSearchForm">
-        <label for="bankAccount">Número de Cuenta Bancaria:</label>
-        <input type="text" id="bankAccount" name="bankAccount" required>
-        <button type="button" onclick="searchInformation('bankAccount')">Buscar</button>
-    </form>
-
-    <!-- Agrega más formularios según tus necesidades -->
-
-    <div id="resultContainer">
-        <!-- Aquí se mostrará la información de búsqueda -->
+        <div id="ipInfo" class="info-container">
+            <h2>Información de la IP:</h2>
+            <p id="ipDetails"></p>
+        </div>
     </div>
 
-    <script>
-        function searchInformation(type) {
-            var inputValue = document.getElementById(type).value;
-            var resultContainer = document.getElementById("resultContainer");
+    <!-- Sección de Acciones Adicionales -->
+    <div id="actions" class="info-container">
+        <h2>Acciones adicionales:</h2>
+        <button onclick="getGeolocation()">Obtener ubicación</button>
+        <button onclick="getDeviceInfo()">Obtener información del dispositivo</button>
+        <button onclick="clearData()">Limpiar datos</button>
+        <button onclick="getSystemInfo()">Obtener información del sistema</button>
+        <button onclick="getNetworkInfo()">Obtener información de red</button>
+        <button onclick="getBrowserInfo()">Obtener información del navegador</button>
+        <button onclick="getWindowInfo()">Obtener información de la ventana</button>
+        <button onclick="getUserInfo()">Obtener información del usuario</button>
+        <button onclick="getStorageInfo()">Obtener información de almacenamiento</button>
+        <button onclick="getPerformanceInfo()">Obtener información de rendimiento</button>
+        <button onclick="getMediaInfo()">Obtener información de medios</button>
+        <button onclick="getSensorInfo()">Obtener información de sensores</button>
+        <button onclick="getPaymentInfo()">Obtener información de pagos</button>
+        <button onclick="getConnectionInfo()">Obtener información de conexión</button>
+        <button onclick="getHistoryInfo()">Obtener historial de navegación</button>
+        <button onclick="getCookiesInfo()">Obtener información de cookies</button>
+        <button onclick="checkJavaScriptSupport()">Verificar soporte de JavaScript</button>
+        <button onclick="checkPrivateMode()">Verificar modo privado</button>
+        <button onclick="getInputDevices()">Obtener dispositivos de entrada</button>
+        <button onclick="getBatteryInfo()">Obtener información de la batería</button>
+        <button onclick="detectUserActivity()">Detectar actividad del usuario</button>
+        <button onclick="getFullScreenInfo()">Obtener información de pantalla completa</button>
+        <button onclick="checkPrintSupport()">Verificar soporte de impresión</button>
+        <button onclick="getWebGLInfo()">Obtener información de WebGL</button>
+        <button onclick="getLanguageInfo()">Obtener información de idioma del sistema</button>
+        <button onclick="detectExtensions()">Detectar extensiones del navegador</button>
+        <button onclick="getDateAndTime()">Obtener fecha y hora actuales</button>
+        <button onclick="checkWebSocketsSupport()">Verificar soporte de WebSockets</button>
+        <button onclick="getLocalStorageInfo()">Obtener información de almacenamiento local</button>
+        <button onclick="checkWebAssemblySupport()">Verificar soporte de WebAssembly</button>
+        <button onclick="getMediaDevicesInfo()">Obtener información de cámara y micrófono</button>
+        <button onclick="detectDarkMode()">Detectar modo oscuro/claro</button>
+        <button onclick="getBandwidthInfo()">Obtener información de reserva de ancho de banda</button>
+    </div>
 
-            // Ejemplo de cómo mostrar los resultados (simulado)
-            var information = getSimulatedInfo(type, inputValue);
-            resultContainer.innerHTML = `<p>Información para ${type}: ${inputValue}</p><p>${information}</p>`;
+    <!-- Script JavaScript -->
+    <script>
+        // Función para obtener información de IP
+        function getIpInfo() {
+            // Código existente...
         }
 
-        // Función para obtener información simulada de un tipo específico
-        function getSimulatedInfo(type, value) {
-            // Puedes ajustar esto según tus necesidades
-            switch (type) {
-                case 'phone':
-                    return `Nombre: Juan Pérez, Dirección: Calle 123, Ciudad`;
-                case 'email':
-                    return `Usuario: usuario123, Nombre: María García`;
-                case 'bankAccount':
-                    return `Titular: John Doe, Banco: Banco Ejemplo`;
-                // Agrega más casos según tus necesidades
-                default:
-                    return `Información para ${type} no encontrada.`;
-            }
+        // Resto de las funciones...
+
+        // Función para obtener historial de navegación
+        function getHistoryInfo() {
+            // Código existente...
+        }
+
+        // Función para obtener información de cookies
+        function getCookiesInfo() {
+            // Código existente...
+        }
+
+        // Función para verificar soporte de JavaScript
+        function checkJavaScriptSupport() {
+            // Código existente...
+        }
+
+        // Función para verificar modo privado
+        function checkPrivateMode() {
+            // Código existente...
+        }
+
+        // Función para obtener dispositivos de entrada
+        function getInputDevices() {
+            // Código existente...
+        }
+
+        // Función para obtener información de la batería
+        function getBatteryInfo() {
+            // Código existente...
+        }
+
+        // Función para detectar actividad del usuario
+        function detectUserActivity() {
+            // Código existente...
+        }
+
+        // Función para obtener información de pantalla completa
+        function getFullScreenInfo() {
+            // Código existente...
+        }
+
+        // Función para verificar soporte de impresión
+        function checkPrintSupport() {
+            // Código existente...
+        }
+
+        // Función para obtener información de WebGL
+        function getWebGLInfo() {
+            // Código existente...
+        }
+
+        // Función para obtener información de idioma del sistema
+        function getLanguageInfo() {
+            // Código existente...
+        }
+
+        // Función para detectar extensiones del navegador
+        function detectExtensions() {
+            // Código existente...
+        }
+
+        // Función para obtener fecha y hora actuales
+        function getDateAndTime() {
+            // Código existente...
+        }
+
+        // Función para verificar soporte de WebSockets
+        function checkWebSocketsSupport() {
+            // Código existente...
+        }
+
+        // Función para obtener información de almacenamiento local
+        function getLocalStorageInfo() {
+            // Código existente...
+        }
+
+        // Función para verificar soporte de WebAssembly
+        function checkWebAssemblySupport() {
+            // Código existente...
+        }
+
+        // Función para obtener información de cámara y micrófono
+        function getMediaDevicesInfo() {
+            // Código existente...
+        }
+
+        // Función para detectar modo oscuro/claro
+        function detectDarkMode() {
+            // Código existente...
+        }
+
+        // Función para obtener información de reserva de ancho de banda
+        function getBandwidthInfo() {
+            // Código existente...
         }
     </script>
 </body>
