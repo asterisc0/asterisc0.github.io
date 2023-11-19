@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESPERA 3D</title>
+    <title>ESPERA 3D Avanzado</title>
     <script type="text/javascript" src="https://brython.info/src/brython.js"></script>
     <style>
         body {
@@ -13,6 +13,7 @@
             text-align: center;
             padding: 20px;
             margin: 0;
+            overflow: hidden;
         }
 
         h1 {
@@ -69,14 +70,53 @@
         }
 
         #mandalaCanvas {
-            border: 2px solid #004D40;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        #formContainer {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #263238;
+            padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            color: #B0BEC5;
+            background-color: #394249;
+            border: 1px solid #78909C;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>ESPERA 3D</h1>
+    <canvas id="mandalaCanvas"></canvas>
+    <h1>ESPERA 3D Avanzado</h1>
+    
+    <div id="formContainer">
+        <form id="searchForm" onsubmit="return false;">
+            <label for="ipInput">IP:</label>
+            <input type="text" id="ipInput" placeholder="Ingrese la IP">
+
+            <label for="emailInput">Correo:</label>
+            <input type="text" id="emailInput" placeholder="Ingrese el correo">
+
+            <label for="urlInput">URL:</label>
+            <input type="text" id="urlInput" placeholder="Ingrese la URL">
+
+            <button onclick="search()">Buscar</button>
+        </form>
+    </div>
     
     <div class="container">
         <!-- Información de IP -->
@@ -99,52 +139,36 @@
             <button onclick="getUrlInfo()">Obtener información</button>
             <textarea id="urlInfo" readonly></textarea>
         </div>
-
-        <!-- Mandala Móvil 3D -->
-        <div class="box" style="position: relative;">
-            <h2>Mandala Móvil 3D</h2>
-            <canvas id="mandalaCanvas" width="150" height="150" style="border: 2px solid #004D40; border-radius: 10px;"></canvas>
-            <script type="text/python">
-                # Código Python para dibujar un mandala móvil 3D
-                import math
-
-                def draw_mandala_3d():
-                    mandala_canvas = document.getElementById("mandalaCanvas")
-                    context = mandala_canvas.getContext("2d")
-                    context.clearRect(0, 0, mandala_canvas.width, mandala_canvas.height)
-
-                    # Configuración de colores y estilos
-                    context.strokeStyle = "red"
-                    context.lineWidth = 2
-
-                    # Mueve el mandala por la página
-                    x_offset = 50 * math.cos(js.global.pageYOffset / 50)
-                    y_offset = 50 * math.sin(js.global.pageYOffset / 50)
-
-                    # Dibujar círculos en forma de mandala 3D con la posición modificada
-                    for i in range(6):
-                        angle = i * (math.pi / 3)
-                        x = mandala_canvas.width / 2 + x_offset + 30 * math.cos(angle)
-                        y = mandala_canvas.height / 2 + y_offset + 30 * math.sin(angle)
-
-                        context.beginPath()
-                        context.arc(x, y, 20, 0, 2 * math.pi)
-                        context.stroke()
-
-                # Llama a la función para dibujar el mandala 3D
-                draw_mandala_3d()
-            </script>
-        </div>
-
-        <!-- Nueva Función - Obtener Información 3D -->
-        <div class="box">
-            <h2>Obtener Información 3D</h2>
-            <button onclick="get3DInfo()">Acción 3D</button>
-            <textarea id="info3D" readonly></textarea>
-        </div>
-
-        <!-- Agrega aquí más bloques similares según tus necesidades -->
     </div>
+
+    <script type="text/python">
+        # Código Python para dibujar un mandala como fondo de página
+        import math
+
+        def draw_mandala():
+            mandala_canvas = document.getElementById("mandalaCanvas")
+            context = mandala_canvas.getContext("2d")
+            context.clearRect(0, 0, mandala_canvas.width, mandala_canvas.height)
+
+            # Configuración de colores y estilos
+            context.strokeStyle = "red"
+            context.lineWidth = 2
+
+            # Dibujar espirales en forma de mandala
+            for i in range(360):
+                angle = math.radians(i)
+                radius = 100 + 50 * math.sin(5 * angle)
+
+                x = mandala_canvas.width / 2 + radius * math.cos(angle)
+                y = mandala_canvas.height / 2 + radius * math.sin(angle)
+
+                context.beginPath()
+                context.arc(x, y, 1, 0, 2 * math.pi)
+                context.stroke()
+
+        # Llama a la función para dibujar el mandala
+        draw_mandala()
+    </script>
 
     <script>
         function getIpInfo() {
@@ -162,10 +186,16 @@
             document.getElementById("urlInfo").value = "Lógica de obtener información de URL";
         }
 
-        // Nueva Función 3D
-        function get3DInfo() {
-            // Implementa la lógica real para obtener información 3D aquí
-            document.getElementById("info3D").value = "Lógica de obtener información 3D";
+        function search() {
+            // Implementa la lógica real para la búsqueda aquí
+            var ip = document.getElementById("ipInput").value;
+            var email = document.getElementById("emailInput").value;
+            var url = document.getElementById("urlInput").value;
+
+            // Lógica de búsqueda y actualización de resultados
+            document.getElementById("ipInfo").value = "Resultados de la búsqueda de IP";
+            document.getElementById("emailEthics").value = "Resultados de la búsqueda ética de correo";
+            document.getElementById("urlInfo").value = "Resultados de la búsqueda de URL";
         }
     </script>
 
