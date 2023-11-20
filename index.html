@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEED</title>
+    <title>Comandos Termux</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #2d2d2d;
-            color: #ffffff;
+            font-family: 'Monoton', cursive;
+            background-color: #000000;
+            color: #ff0000;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         header {
@@ -30,22 +30,29 @@
             flex-direction: column;
             align-items: center;
             flex-grow: 1;
-            overflow: auto;
             padding: 20px;
             box-sizing: border-box;
             width: 100%;
         }
 
-        #chatContainer {
-            width: 100%;
-            max-height: 50vh;
-            overflow-y: auto;
-            border: 1px solid #4CAF50;
-            border-radius: 10px;
-            padding: 10px;
-            box-sizing: border-box;
-            margin-top: 20px;
-            background-color: #ffffff;
+        h2 {
+            color: #ff0000;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background-color: #333;
+            color: #ffffff;
+            padding: 5px;
+            border-radius: 3px;
         }
 
         button {
@@ -62,73 +69,91 @@
         button:hover {
             background-color: #45a049;
         }
-
-        #ipInput, #urlInput {
-            padding: 10px;
-            font-size: 16px;
-            margin-right: 10px;
-            border: 1px solid #4CAF50;
-            border-radius: 5px;
-            color: #333;
-        }
-
-        label {
-            color: #4CAF50;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        #chatContainer div {
-            margin-bottom: 10px;
-            color: #333;
-        }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monoton&display=swap">
 </head>
 <body>
     <header>
-        <h1>WEED</h1>
+        <h1>Comandos Termux</h1>
     </header>
 
     <main>
-        <div>
-            <label for="ipInput">Ingresar IP:</label>
-            <input type="text" id="ipInput">
-            <button onclick="getIPInfo()">Obtener Información de IP</button>
-        </div>
+        <h2>Comandos Básicos</h2>
+        <ul>
+            <li><code>pkg update && pkg upgrade</code> - Actualizar paquetes</li>
+            <li><code>pkg install nombre_paquete</code> - Instalar un paquete</li>
+            <li><code>termux-setup-storage</code> - Configurar almacenamiento</li>
+            <li><code>cd nombre_directorio</code> - Cambiar de directorio</li>
+            <li><code>ls</code> - Listar archivos en el directorio</li>
+            <li><code>cp archivo destino</code> - Copiar un archivo</li>
+            <li><code>mv archivo destino</code> - Mover o renombrar un archivo</li>
+            <li><code>rm archivo</code> - Eliminar un archivo</li>
+            <li><code>mkdir nombre_directorio</code> - Crear un directorio</li>
+            <li><code>rmdir nombre_directorio</code> - Eliminar un directorio vacío</li>
+            <li><code>cat archivo</code> - Mostrar el contenido de un archivo</li>
+            <li><code>echo "texto" > archivo</code> - Crear un archivo con texto</li>
+            <li><code>echo $variable</code> - Mostrar el valor de una variable</li>
+            <li><code>chmod permisos archivo</code> - Cambiar permisos de un archivo</li>
+            <li><code>chown usuario:grupo archivo</code> - Cambiar propietario de un archivo</li>
+            <li><code>pwd</code> - Mostrar el directorio actual</li>
+            <li><code>whoami</code> - Mostrar el nombre de usuario actual</li>
+            <li><code>date</code> - Mostrar la fecha y hora actuales</li>
+            <li><code>clear</code> - Limpiar la pantalla</li>
+            <!-- Agrega más comandos según sea necesario -->
+        </ul>
 
-        <div>
-            <label for="urlInput">Ingresar URL:</label>
-            <input type="text" id="urlInput">
-            <button onclick="scrapeURL()">Web Scraping</button>
-        </div>
-
-        <div id="chatContainer"></div>
+        <h2>Acciones Adicionales</h2>
+        <button onclick="simularAccion1()">Simular Acción 1</button>
+        <button onclick="simularAccion2()">Simular Acción 2</button>
+        <button onclick="simularAccion3()">Simular Acción 3</button>
+        <button onclick="simularAccion4()">Simular Acción 4</button>
+        <button onclick="simularAccion5()">Simular Acción 5</button>
+        <button onclick="simularAccion6()">Simular Acción 6</button>
+        <button onclick="simularAccion7()">Simular Acción 7</button>
+        <button onclick="simularAccion8()">Simular Acción 8</button>
+        <button onclick="simularAccion9()">Simular Acción 9</button>
+        <button onclick="simularAccion10()">Simular Acción 10</button>
     </main>
 
     <script>
-        async function getIPInfo() {
-            const ip = document.getElementById("ipInput").value;
-            const result = await fetchData(`https://jsonplaceholder.typicode.com/posts/${ip}`);
-            displayResult(result);
+        function simularAccion1() {
+            alert("Simulando Acción 1");
         }
 
-        async function scrapeURL() {
-            const url = document.getElementById("urlInput").value;
-            const result = await fetchData(`https://jsonplaceholder.typicode.com/posts/${url}`);
-            displayResult(result);
+        function simularAccion2() {
+            alert("Simulando Acción 2");
         }
 
-        async function fetchData(endpoint) {
-            const response = await fetch(endpoint);
-            const data = await response.json();
-            return data;
+        function simularAccion3() {
+            alert("Simulando Acción 3");
         }
 
-        function displayResult(result) {
-            const chatContainer = document.getElementById("chatContainer");
-            const chatMessage = document.createElement("div");
-            chatMessage.textContent = JSON.stringify(result, null, 2);
-            chatContainer.appendChild(chatMessage);
+        function simularAccion4() {
+            alert("Simulando Acción 4");
+        }
+
+        function simularAccion5() {
+            alert("Simulando Acción 5");
+        }
+
+        function simularAccion6() {
+            alert("Simulando Acción 6");
+        }
+
+        function simularAccion7() {
+            alert("Simulando Acción 7");
+        }
+
+        function simularAccion8() {
+            alert("Simulando Acción 8");
+        }
+
+        function simularAccion9() {
+            alert("Simulando Acción 9");
+        }
+
+        function simularAccion10() {
+            alert("Simulando Acción 10");
         }
     </script>
 </body>
