@@ -6,7 +6,7 @@
     <title>Comandos Termux</title>
     <style>
         body {
-            font-family: 'Monoton', cursive;
+            font-family: 'Nosifer', cursive;
             background-color: #000000;
             color: #ff0000;
             margin: 0;
@@ -69,8 +69,25 @@
         button:hover {
             background-color: #45a049;
         }
+
+        #chat {
+            background-color: #333;
+            color: #ffffff;
+            padding: 10px;
+            margin-top: 20px;
+            max-width: 400px;
+            width: 100%;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+
+        #inputChat {
+            margin-top: 10px;
+            width: 100%;
+            padding: 5px;
+        }
     </style>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monoton&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap">
 </head>
 <body>
     <header>
@@ -80,80 +97,100 @@
     <main>
         <h2>Comandos Básicos</h2>
         <ul>
-            <li><code>pkg update && pkg upgrade</code> - Actualizar paquetes</li>
-            <li><code>pkg install nombre_paquete</code> - Instalar un paquete</li>
-            <li><code>termux-setup-storage</code> - Configurar almacenamiento</li>
-            <li><code>cd nombre_directorio</code> - Cambiar de directorio</li>
-            <li><code>ls</code> - Listar archivos en el directorio</li>
-            <li><code>cp archivo destino</code> - Copiar un archivo</li>
-            <li><code>mv archivo destino</code> - Mover o renombrar un archivo</li>
-            <li><code>rm archivo</code> - Eliminar un archivo</li>
-            <li><code>mkdir nombre_directorio</code> - Crear un directorio</li>
-            <li><code>rmdir nombre_directorio</code> - Eliminar un directorio vacío</li>
-            <li><code>cat archivo</code> - Mostrar el contenido de un archivo</li>
-            <li><code>echo "texto" > archivo</code> - Crear un archivo con texto</li>
-            <li><code>echo $variable</code> - Mostrar el valor de una variable</li>
-            <li><code>chmod permisos archivo</code> - Cambiar permisos de un archivo</li>
-            <li><code>chown usuario:grupo archivo</code> - Cambiar propietario de un archivo</li>
-            <li><code>pwd</code> - Mostrar el directorio actual</li>
-            <li><code>whoami</code> - Mostrar el nombre de usuario actual</li>
-            <li><code>date</code> - Mostrar la fecha y hora actuales</li>
-            <li><code>clear</code> - Limpiar la pantalla</li>
-            <!-- Agrega más comandos según sea necesario -->
+            <li><code>pkg update && pkg upgrade</code> - Invocar el ritual de actualización</li>
+            <li><code>pkg install nombre_paquete</code> - Convocar e instalar un paquete</li>
+            <li><code>termux-setup-storage</code> - Configurar el almacenamiento místico</li>
+            <li><code>cd nombre_directorio</code> - Entrar al reino del directorio</li>
+            <li><code>ls</code> - Listar los elementos del reino</li>
+            <li><code>cp archivo destino</code> - Duplicar el pergamino</li>
+            <li><code>mv archivo destino</code> - Mover o renombrar el pergamino</li>
+            <li><code>rm archivo</code> - Borrar el pergamino maldito</li>
+            <li><code>mkdir nombre_directorio</code> - Crear un portal dimensional</li>
+            <li><code>rmdir nombre_directorio</code> - Cerrar el portal dimensional vacío</li>
+            <li><code>cat archivo</code> - Leer las runas del archivo</li>
+            <li><code>echo "texto" > archivo</code> - Conjurar un archivo con texto</li>
+            <li><code>echo $variable</code> - Revelar el valor de una variable mística</li>
+            <li><code>chmod permisos archivo</code> - Cambiar los encantamientos del archivo</li>
+            <li><code>chown usuario:grupo archivo</code> - Cambiar el propietario del archivo por un hechicero</li>
+            <li><code>pwd</code> - Conocer el camino actual en el inframundo</li>
+            <li><code>whoami</code> - Invocar al ser interior</li>
+            <li><code>date</code> - Descifrar la fecha y hora en las estrellas</li>
+            <li><code>clear</code> - Limpiar la bola de cristal</li>
+            <!-- Agrega más comandos místicos según sea necesario -->
         </ul>
 
         <h2>Acciones Adicionales</h2>
-        <button onclick="simularAccion1()">Simular Acción 1</button>
-        <button onclick="simularAccion2()">Simular Acción 2</button>
-        <button onclick="simularAccion3()">Simular Acción 3</button>
-        <button onclick="simularAccion4()">Simular Acción 4</button>
-        <button onclick="simularAccion5()">Simular Acción 5</button>
-        <button onclick="simularAccion6()">Simular Acción 6</button>
-        <button onclick="simularAccion7()">Simular Acción 7</button>
-        <button onclick="simularAccion8()">Simular Acción 8</button>
-        <button onclick="simularAccion9()">Simular Acción 9</button>
-        <button onclick="simularAccion10()">Simular Acción 10</button>
+        <button onclick="simularAccion11()">Simular Acción 11</button>
+        <button onclick="simularAccion12()">Simular Acción 12</button>
+        <button onclick="simularAccion13()">Simular Acción 13</button>
+        <button onclick="simularAccion14()">Simular Acción 14</button>
+        <button onclick="simularAccion15()">Simular Acción 15</button>
+        <button onclick="simularAccion16()">Simular Acción 16</button>
+        <button onclick="simularAccion17()">Simular Acción 17</button>
+        <button onclick="simularAccion18()">Simular Acción 18</button>
+        <button onclick="simularAccion19()">Simular Acción 19</button>
+        <button onclick="simularAccion20()">Simular Acción 20</button>
+
+        <div id="chat"></div>
+        <input type="text" id="inputChat" placeholder="Escribe un comando místico..." onkeydown="if(event.keyCode==13) simularComando()">
     </main>
 
     <script>
-        function simularAccion1() {
-            alert("Simulando Acción 1");
+        function simularAccion11() {
+            agregarMensaje("Simulando Acción 11");
         }
 
-        function simularAccion2() {
-            alert("Simulando Acción 2");
+        function simularAccion12() {
+            agregarMensaje("Simulando Acción 12");
         }
 
-        function simularAccion3() {
-            alert("Simulando Acción 3");
+        function simularAccion13() {
+            agregarMensaje("Simulando Acción 13");
         }
 
-        function simularAccion4() {
-            alert("Simulando Acción 4");
+        function simularAccion14() {
+            agregarMensaje("Simulando Acción 14");
         }
 
-        function simularAccion5() {
-            alert("Simulando Acción 5");
+        function simularAccion15() {
+            agregarMensaje("Simulando Acción 15");
         }
 
-        function simularAccion6() {
-            alert("Simulando Acción 6");
+        function simularAccion16() {
+            agregarMensaje("Simulando Acción 16");
         }
 
-        function simularAccion7() {
-            alert("Simulando Acción 7");
+        function simularAccion17() {
+            agregarMensaje("Simulando Acción 17");
         }
 
-        function simularAccion8() {
-            alert("Simulando Acción 8");
+        function simularAccion18() {
+            agregarMensaje("Simulando Acción 18");
         }
 
-        function simularAccion9() {
-            alert("Simulando Acción 9");
+        function simularAccion19() {
+            agregarMensaje("Simulando Acción 19");
         }
 
-        function simularAccion10() {
-            alert("Simulando Acción 10");
+        function simularAccion20() {
+            agregarMensaje("Simulando Acción 20");
+        }
+
+        function simularComando() {
+            var input = document.getElementById("inputChat");
+            var comando = input.value.trim();
+            if (comando !== "") {
+                agregarMensaje("Simulando comando místico: " + comando);
+                input.value = "";
+            }
+        }
+
+        function agregarMensaje(mensaje) {
+            var chat = document.getElementById("chat");
+            var nuevoMensaje = document.createElement("p");
+            nuevoMensaje.textContent = mensaje;
+            chat.appendChild(nuevoMensaje);
+            chat.scrollTop = chat.scrollHeight;
         }
     </script>
 </body>
